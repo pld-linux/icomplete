@@ -1,8 +1,4 @@
 #
-# Conditional build:
-%bcond_with	tests		# build with tests
-%bcond_without	tests		# build without tests
-#
 Summary:	IComplete - A code completion system
 Name:		icomplete
 Version:	0.3
@@ -12,78 +8,63 @@ Group:		Applications
 Source0:	http://mesh.dl.sourceforge.net/sourceforge/icomplete/%{name}-%{version}.tar.bz2
 # Source0-md5:	cc2ca34af559f9face1e0670c0b0d61b
 URL:		http://stud4.tuwien.ac.at/~e0125672/icomplete
-#BuildRequires:	-
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-#BuildRequires:	libtool
-#Requires(postun):	-
-#Requires(pre,post):	-
-#Requires(preun):	-
-#Requires:	-
-#Provides:	group(foo)
-#Provides:	user(foo)
-#Provides:	-
-#Obsoletes:	-
-#Conflicts:	-
-#BuildArch:	noarch
-#ExclusiveArch:	%{ix86}
+Requires:	ctags
+Requires:	vim-rt >= 4:7.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+IComplete is a command line program, which lists possible completions
+for a certain position in a source code, reusing the excellent
+Exuberant-ctags program.
 
-%description -l pl
+Features:
+- Automatic generation of a tags file for the current source file by
+building a tree of included files. 
 
-%package subpackage
-Summary:	-
-Summary(pl):	-
-Group:		-
+- Listing members (also inherited ones) of a class
+  For QString s; s. only non-static members are suggested, for
+QString:: only static ones. 
 
-%description subpackage
+- Listing all function signatures of overloading methods
 
-%description subpackage -l pl
+- Recognizes return values of methods.
+  QWidget w; w.rect().topLeft(). // List completions for a QPoint 
 
-%if %{with devel-static}
-%package devel
-Summary:	Development libraries and header files for ... library
-Group:		Development/Libraries
+- Uses the scope of the cursor position
+  Recognizes, if you are inside a method-definition and completes also
+private or protected variables for this class. For a global scope,
+only public members are suggested. 
 
-%description devel
-This is the package containing the development libraries and header
-files for ...
+- Works in both console and graphical vim
 
-%package static
-Summary:	Static ... library
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static ... library.
-
-%endif
+- Uses a cache system for increased speed.
 
 %prep
 %setup -q
 
 %build
-#%%{__gettextize}
-#%%{__libtoolize}
-#%%{__aclocal}
-#%%{__autoconf}
-#%%{__autoheader}
-#%%{__automake}
-#cp -f /usr/share/automake/config.sub .
-%configure
-%{__make}
+CFLAGS="${CFLAGS:-%optflags}" ; export CFLAGS ; 
+CXXFLAGS="${CXXFLAGS:-%optflags}" ; export CXXFLAGS ;
+./configure \
+	--prefix=%{_prefix} \
+	--exec-prefix=%{_exec_prefix} \
+	--bindir=%{_bindir} \
+	--sbindir=%{_sbindir} \
+	--sysconfdir=%{_sysconfdir} \
+	--datadir=%{_datadir} \
+	--includedir=%{_includedir} \
+	--libdir=%{_libdir} \
+	--libexecdir=%{_libexecdir} \
+	--localstatedir=%{_localstatedir} \
+	--sharedstatedir=%{_sharedstatedir} \
+	--mandir=%{_mandir} \
+	--infodir=%{_infodir}
 
-#%{__make} \
-#	CFLAGS="%{rpmcflags}" \
-#	LDFLAGS="%{rpmldflags}"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-# create directories if necessary
-#install -d $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -91,52 +72,10 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%pre
-
-%post
-
-%preun
-
-%postun
-
-%if %{with ldconfig}
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
-%endif
-
-%if %{with initscript}
-%post init
-/sbin/chkconfig --add %{name}
-%service %{name} restart
-
-%preun init
-if [ "$1" = "0" ]; then
-	%service -q %{name} stop
-	/sbin/chkconfig --del %{name}
-fi
-%endif
-
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS CREDITS ChangeLog NEWS README THANKS TODO
-
-%if 0
-# if _sysconfdir != /etc:
-#%%dir %{_sysconfdir}
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
-%attr(755,root,root) %{_bindir}/*
-%{_datadir}/%{name}
-%endif
-
-# initscript and its config
-%if %{with initscript}
-%attr(754,root,root) /etc/rc.d/init.d/%{name}
-%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
-%endif
-
-#%{_examplesdir}/%{name}-%{version}
-
-%files subpackage
-%defattr(644,root,root,755)
-#%doc extras/*.gz
-#%{_datadir}/%{name}-ext
+%doc AUTHORS ChangeLog README TODO
+%attr(755,root,root) %{_bindir}/icomplete
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/icomplete.conf
+%{_datadir}/vim/vimfiles/autoload/cppcomplete.vim
+%{_datadir}/vim/vimfiles/plugin/icomplete.vim
