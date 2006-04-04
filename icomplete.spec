@@ -1,4 +1,5 @@
-#
+# TODO
+# - pass CC, currently broken and can't handle multiword CC
 Summary:	IComplete - A code completion system
 Name:		icomplete
 Version:	0.3
@@ -35,7 +36,24 @@ Features:
 %setup -q
 
 %build
-%configure
+# not autoconf generated configure
+CFLAGS="%{rpmcflags}" \
+CXXFLAGS="%{rpmcxxflags}" \
+./configure \
+	--prefix=%{_prefix} \
+	--exec-prefix=%{_exec_prefix} \
+	--bindir=%{_bindir} \
+	--sbindir=%{_sbindir} \
+	--sysconfdir=%{_sysconfdir} \
+	--datadir=%{_datadir} \
+	--includedir=%{_includedir} \
+	--libdir=%{_libdir} \
+	--libexecdir=%{_libexecdir} \
+	--localstatedir=%{_localstatedir} \
+	--sharedstatedir=%{_sharedstatedir} \
+	--mandir=%{_mandir} \
+	--infodir=%{_infodir}
+
 %{__make}
 
 %install
