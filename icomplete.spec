@@ -37,6 +37,7 @@ Features:
 
 %build
 # not autoconf generated configure
+CC="%{__cc}" \
 CFLAGS="%{rpmcflags}" \
 CXXFLAGS="%{rpmcxxflags}" \
 ./configure \
