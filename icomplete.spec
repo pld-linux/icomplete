@@ -3,12 +3,12 @@
 Summary:	IComplete - A code completion system
 Summary(pl):	IComplete - system dope³niania kodu
 Name:		icomplete
-Version:	0.3
+Version:	0.4
 Release:	1
 License:	GPL
 Group:		Applications
 Source0:	http://dl.sourceforge.net/icomplete/%{name}-%{version}.tar.bz2
-# Source0-md5:	cc2ca34af559f9face1e0670c0b0d61b
+# Source0-md5:	b802fc7c9a8a86b5dc5adf3fc62c010f
 URL:		http://stud4.tuwien.ac.at/~e0125672/icomplete/
 Requires:	ctags
 Requires:	vim-rt >= 4:7.0
