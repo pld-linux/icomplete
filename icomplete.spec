@@ -1,7 +1,7 @@
 # TODO
 # - pass CC, currently broken and can't handle multiword CC
 Summary:	IComplete - A code completion system
-Summary(pl):	IComplete - system dope³niania kodu
+Summary(pl.UTF-8):   IComplete - system dopeÅ‚niania kodu
 Name:		icomplete
 Version:	0.4
 Release:	1
@@ -33,27 +33,27 @@ Features:
 - Works in both console and graphical vim
 - Uses a cache system for increased speed.
 
-%description -l pl
-IComplete to dzia³aj±cy z linii poleceñ program wypisuj±cy mo¿liwe
-dope³nienia dla ró¿nych fragmentów kodu ¼ród³owego z wykorzystaniem
-¶wietlego programu Exuberant-ctags.
+%description -l pl.UTF-8
+IComplete to dziaÅ‚ajÄ…cy z linii poleceÅ„ program wypisujÄ…cy moÅ¼liwe
+dopeÅ‚nienia dla rÃ³Å¼nych fragmentÃ³w kodu ÅºrÃ³dÅ‚owego z wykorzystaniem
+Å›wietlego programu Exuberant-ctags.
 
-Mo¿liwo¶ci:
-- Automatyczne generowanie pliku tags dla bie¿±cego pliku ¼ród³owego
-  poprzez budowanie drzewa w³±czanych plików.
-- Wypisywanie sk³adowych (tak¿e dziedziczonych) klasy; dla QString s;
-  s. sugerowane s± tylko niestatyczne sk³adowe, dla QString:: tylko
+MoÅ¼liwoÅ›ci:
+- Automatyczne generowanie pliku tags dla bieÅ¼Ä…cego pliku ÅºrÃ³dÅ‚owego
+  poprzez budowanie drzewa wÅ‚Ä…czanych plikÃ³w.
+- Wypisywanie skÅ‚adowych (takÅ¼e dziedziczonych) klasy; dla QString s;
+  s. sugerowane sÄ… tylko niestatyczne skÅ‚adowe, dla QString:: tylko
   statyczne.
-- Wypisywanie wszystkich sygnatur funkcji przeci±¿onych metod.
-- Rozpoznawanie warto¶ci zwracanych przez metody; QWidget w;
-  w.rect().topLeft(). wypisze dope³nienia dla QPoint.
-- Wykorzystywanie kontekstu po³o¿enia kursora; program rozpoznaje
-  pozycjê wewn±trz definicji metody i dope³nia tak¿e prywatne i
-  chronione zmienne dla danej klasy. W kontek¶cie globalnym sugerowane
-  s± wy³±cznie publiczne sk³adowe.
-- Dzia³a zarówno w terminalowym jak i graficznym vimie.
-- Wykorzystuje system pamiêci podrêcznej dla zwiêkszenia prêdko¶ci
-  dzia³ania.
+- Wypisywanie wszystkich sygnatur funkcji przeciÄ…Å¼onych metod.
+- Rozpoznawanie wartoÅ›ci zwracanych przez metody; QWidget w;
+  w.rect().topLeft(). wypisze dopeÅ‚nienia dla QPoint.
+- Wykorzystywanie kontekstu poÅ‚oÅ¼enia kursora; program rozpoznaje
+  pozycjÄ™ wewnÄ…trz definicji metody i dopeÅ‚nia takÅ¼e prywatne i
+  chronione zmienne dla danej klasy. W kontekÅ›cie globalnym sugerowane
+  sÄ… wyÅ‚Ä…cznie publiczne skÅ‚adowe.
+- DziaÅ‚a zarÃ³wno w terminalowym jak i graficznym vimie.
+- Wykorzystuje system pamiÄ™ci podrÄ™cznej dla zwiÄ™kszenia prÄ™dkoÅ›ci
+  dziaÅ‚ania.
 
 %prep
 %setup -q
