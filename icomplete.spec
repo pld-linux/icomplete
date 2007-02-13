@@ -1,7 +1,7 @@
 # TODO
 # - pass CC, currently broken and can't handle multiword CC
 Summary:	IComplete - A code completion system
-Summary(pl.UTF-8):   IComplete - system dopełniania kodu
+Summary(pl.UTF-8):	IComplete - system dopełniania kodu
 Name:		icomplete
 Version:	0.4
 Release:	1
